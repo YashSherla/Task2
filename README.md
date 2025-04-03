@@ -38,6 +38,6 @@ This project uses the following dependencies:
 First, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/yourusername/flutter-news-app.git
-cd flutter-news-app
+git clone https://github.com/YashSherla/Task2
+
 
