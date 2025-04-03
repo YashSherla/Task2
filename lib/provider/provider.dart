@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:task2/model/news_model.dart';
 import 'package:http/http.dart' as http;
@@ -11,6 +12,7 @@ class NewsProvider extends ChangeNotifier {
         'https://newsapi.org/v2/top-headlines?category=$category&page=$page&pageSize=10&q=$search&apiKey=$apiKey';
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
+      log(response.body);
       List articlesJson = json.decode(response.body)['articles'];
       return articlesJson.map((article) => Article.fromJson(article)).toList();
     } else {

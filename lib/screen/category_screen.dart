@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task2/model/news_model.dart';
@@ -27,7 +25,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     _loadArticles();
   }
 
-  void _loadArticles({String searchTerm = ''}) {
+  void _loadArticles() async {
     if (isLoading) return;
 
     setState(() {
@@ -39,9 +37,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
         .getTopHeadlinesCategory(widget.category, currentPage, '')
         .then((newArticles) {
       setState(() {
-        if (searchTerm.isEmpty) {
-          currentPage++;
-        }
+        // if (searchTerm.isEmpty) {
+        //   currentPage++;
+        // }
         currentPage++;
         allArticles.addAll(newArticles);
         isLoading = false;
@@ -66,26 +64,28 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ),
         body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CupertinoSearchTextField(
-                controller: searchController,
-                onChanged: (value) {
-                  setState(() {
-                    allArticles.clear();
-                  });
-                  _loadArticles(searchTerm: value);
-                },
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey),
-                  color: Colors.transparent,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(5),
-                  ),
-                ),
-                placeholder: "Search ${widget.category}",
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: CupertinoSearchTextField(
+            //     style: TextStyle(
+            //         color: Theme.of(context).textTheme.bodyLarge?.color),
+            //     controller: searchController,
+            //     onChanged: (value) {
+            //       setState(() {
+            //         allArticles.clear();
+            //       });
+            //       _loadArticles(searchTerm: value);
+            //     },
+            //     decoration: BoxDecoration(
+            //       border: Border.all(color: Colors.grey),
+            //       color: Colors.transparent,
+            //       borderRadius: const BorderRadius.all(
+            //         Radius.circular(5),
+            //       ),
+            //     ),
+            //     placeholder: "Search ${widget.category}",
+            //   ),
+            // ),
             Expanded(
               child: errorLogs.isNotEmpty
                   ? Column(
